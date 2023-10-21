@@ -55,18 +55,27 @@ void handleCard(int scannerIndex, uint8_t uid[], uint8_t uidLength) {
 
   bool isBlank = (uid[0] == 0x00 && uid[1] == 0x00 && uid[2] == 0x00 && uid[3] == 0x00);
 
+ // Scanner 1 Tag: UID: 0x53 0x05 0x4F 0xFA
+ // Scanner 1 Card: UID: 0x53 0x72 0xFA 0xAB
+ 
+ // Scanner 2 Tag: UID: 0x33 0x26 0x84 0xFA
+ // Scanner 2 Card: UID: 0xA3 0xA5 0xE4 0xAB
+ 
+ // Scanner 3 Tag: UID: 0xB3 0x75 0x39 0xFA
+ // Scanner 3 Card: UID: 0xD3 0x85 0x03 0xAC
+
   bool Cards[] = {
    ((uid[0] == 0x53 && uid[1] == 0x05 && uid[2] == 0x4F && uid[3] == 0xFA) ||
                  (uid[0] == 0x53 && uid[1] == 0x72 && uid[2] == 0xFA && uid[3] == 0xAB)),
                  
-   ((uid[0] == 0x53 && uid[1] == 0x05 && uid[2] == 0x4F && uid[3] == 0xFA) ||
-                 (uid[0] == 0x53 && uid[1] == 0x72 && uid[2] == 0xFA && uid[3] == 0xAB)),
+   ((uid[0] == 0x33 && uid[1] == 0x26 && uid[2] == 0x84 && uid[3] == 0xFA) ||
+                 (uid[0] == 0xA3 && uid[1] == 0xA5 && uid[2] == 0xE4 && uid[3] == 0xAB)),
                  
-   ((uid[0] == 0x53 && uid[1] == 0x05 && uid[2] == 0x4F && uid[3] == 0xFA) ||
-                 (uid[0] == 0x53 && uid[1] == 0x72 && uid[2] == 0xFA && uid[3] == 0xAB)),
+   ((uid[0] == 0xB3 && uid[1] == 0x75 && uid[2] == 0x39 && uid[3] == 0xFA) ||
+                 (uid[0] == 0xD3 && uid[1] == 0x85 && uid[2] == 0x03 && uid[3] == 0xAC)),
   };
 
-    if (Cards[scannerIndex + 1]) {
+    if (Cards[scannerIndex]) {
     Serial.println(" - This is an even number");
     digitalWrite(GREEN_LED, HIGH);
   } else {
